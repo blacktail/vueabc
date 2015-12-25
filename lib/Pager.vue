@@ -99,20 +99,16 @@
             maxPagerPos: function () {
                 return Math.ceil(this.maxPageIndex / this.pagerSize);
             },
-            pagerPos: {
-                get: function () {
+            pagerPos: function() {
                     return Math.min(Math.max(Math.ceil(this.pageIndex / this.pagerSize), 1), this.maxPagerPos);
-                }
             },
             startPageNum: function () {
                 return Math.max((this.pagerPos - 1) * this.pagerSize + 1, 1);
             },
             endPageNum: function () {
-                console.log('end', this.maxPageIndex, this.pageSize);
                 return Math.min(this.startPageNum + this.pagerSize, this.maxPageIndex + 1);
             },
             pageNumRange: function () {
-                console.log(this.startPageNum, this.endPageNum);
                 return _.range(this.startPageNum, this.endPageNum);
             },
             isOnePage: function () {

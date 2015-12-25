@@ -56,7 +56,7 @@
 </style>
 
 <template>
-    <Pager :page-index="pageIndex" :page-size="pageSize" :total="total" pager-label="items"></Pager>
+    <Pager :page-index.sync="pageIndex" :page-size="pageSize" :total="total" pager-label="items"></Pager>
     <table class="lm-table">
         <thead>
             <tr>
@@ -71,7 +71,7 @@
             </td>
         </tr>
     </table>
-    <Pager :page-index="pageIndex" :page-size="pageSize" :total="total" pager-label="items"></Pager>
+    <Pager :page-index.sync="pageIndex" :page-size="pageSize" :total="total" pager-label="items"></Pager>
 </template>
 
 
@@ -96,14 +96,9 @@
             pageData: function () {
                 var total = this.total;
 
-                console.log('pageSize', this.pageSize);
-
                 var startIndex = Math.min((this.pageIndex - 1) * this.pageSize, total);
                 var endIndex = Math.min(startIndex + this.pageSize, total);
-
-
-                var pageData = this.data.rows.slice(startIndex, endIndex);
-                return pageData;
+                return this.data.rows.slice(startIndex, endIndex);
             },
             total: function () {
                 return this.data.rows.length;
