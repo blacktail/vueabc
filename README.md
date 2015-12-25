@@ -11,6 +11,13 @@ Open the demo/demo.html in your favorite browser.
 npm install
 ```
 
+## dev mode
 ```
 npm run dev
 ```
+
+## build mode
+```
+npm run build
+```
+
