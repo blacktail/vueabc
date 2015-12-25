@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>Components demo using vue.js</title>
+    <script src="./lodash.js"></script>
+    <script src="./vue.js"></script>
+    <script src="http://localhost:8080/assets/Table.js"></script>
+</head>
+<body>
+
+<div id="table-demo">
+    <h3>{{title}}</h3>
+
+    <lm-table :data="tableData"></lm-table>
+</div>
+
+<script>
+    // the tableData, we can using static data or get the data from remote server(by ajax for example)
+    var tableData = {
+        header: ['name', 'age', 'nation'],
+        rows: [
+            ['PandaPanda', 0, 'China']
+        ]
+    };
+
+
+    new Vue({
+        el: '#table-demo',
+        data: {
+            title: 'Dynamic Table demo',
+            tableData: tableData
+        },
+        components: {
+            'lm-table': Table
+        }
+    });
+
+
+    var counter = 0;
+    setInterval(function () {
+        tableData.rows.push(['PandaPanda', ++counter, _.shuffle(['China', 'US', 'JP', 'UK'])[0]]);
+    }, 1000);
+</script>
+</body>
+
+</html>
