@@ -1,5 +1,6 @@
 <style lang="sass" scoped>
     .lm-table {
+        width: 100%;
         th, td {
             border-right: 1px dashed #c3c2c2;
             padding-left: 10px;
@@ -55,13 +56,14 @@
 </style>
 
 <template>
+    <Pager :page-index="pageIndex" :page-size="pageSize" :total="total" pager-label="items"></Pager>
     <table class="lm-table">
         <thead>
             <tr>
                 <th v-for="header in data.header">{{header}}</th>
             </tr>
         </thead>
-        <tr v-for="row in data.rows">
+        <tr v-for="row in pageData">
             <td v-for="cell in row">
                 <div class="td-wrapper">
                     {{cell}}
@@ -69,10 +71,13 @@
             </td>
         </tr>
     </table>
+    <Pager :page-index="pageIndex" :page-size="pageSize" :total="total" pager-label="items"></Pager>
 </template>
 
 
 <script>
+    import Pager from './Pager.vue';
+
     export default {
         props: {
             data: {
@@ -81,7 +86,37 @@
                     header: [],
                     rows: []
                 }
+            },
+            pageSize: {
+                type: Number,
+                default: 5
             }
+        },
+        computed: {
+            pageData: function () {
+                var total = this.total;
+
+                console.log('pageSize', this.pageSize);
+
+                var startIndex = Math.min((this.pageIndex - 1) * this.pageSize, total);
+                var endIndex = Math.min(startIndex + this.pageSize, total);
+
+
+                var pageData = this.data.rows.slice(startIndex, endIndex);
+                return pageData;
+            },
+            total: function () {
+                return this.data.rows.length;
+            }
+        },
+        data: function() {
+            return {
+                pageIndex: 1
+            };
+        },
+
+        components: {
+            Pager
         }
     };
 </script>

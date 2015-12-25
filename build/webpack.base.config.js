@@ -1,5 +1,6 @@
 module.exports = {
     entry: {
+        Pager: ['./lib/Pager.vue'],
         Table: './lib/Table.vue'
     },
     output: {
@@ -47,5 +48,14 @@ module.exports = {
     babel: {
         presets: ['es2015', 'stage-0'],
         plugins: ['transform-runtime']
-    }
+    },
+
+    externals:[{
+        'lodash': {
+            root: '_',
+            commonjs: 'lodash',
+            commonjs2: 'lodash',
+            amd: 'lodash'
+        }
+    }]
 };

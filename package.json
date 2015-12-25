@@ -11,6 +11,7 @@
   "author": "mr.zhangping@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "lodash": "^3.10.1",
     "vue": "^1.0.13"
   },
   "devDependencies": {
